@@ -6,11 +6,18 @@ using OpenTelemetry.Resources;
 
 namespace WeatherApp
 {
-     static class OpenTelemetryUtil
+    static class OpenTelemetryUtil
     {
-
         private static readonly string serviceName = "Microlise.OpenTelemetry.OtelApi";
         private static readonly string serviceVersion = "1.0.0";
+        private static string OTELCollectorURLPath() {
+            var enviromentPath = Environment.GetEnvironmentVariable("OTEL_COLLECTOR_URL");
+            if (enviromentPath != null) {
+                return enviromentPath;
+            }
+            return "http://";
+        }
+
         static public TracerProviderBuilder BuildOpenTelemetryWithTracer(TracerProviderBuilder builder) {
             builder
                 .AddSource(serviceName)
@@ -21,13 +28,12 @@ namespace WeatherApp
 #if DEBUG
                 .AddConsoleExporter(options => {
                     options.Targets = ConsoleExporterOutputTargets.Debug;
-                });
-#else
+                })
+# endif
                 .AddOtlpExporter(o =>
                 {
-                    o.Endpoint = new Uri("http://otel-collector:4317");
+                    o.Endpoint = new Uri(OTELCollectorURLPath());
                 });
-#endif
             return builder;
         }
 
@@ -42,13 +48,12 @@ namespace WeatherApp
 #if DEBUG
                 .AddConsoleExporter(options => {
                     options.Targets = ConsoleExporterOutputTargets.Debug;
-                });
-#else
+                })
+#endif
                 .AddOtlpExporter(o =>
                 {
-                    o.Endpoint = new Uri("http://otel-collector:4317");
+                    o.Endpoint = new Uri(OTELCollectorURLPath());
                 });
-#endif
             return builder;
         }
 
@@ -61,12 +66,11 @@ namespace WeatherApp
             options.AddConsoleExporter(opt => {
                 opt.Targets = ConsoleExporterOutputTargets.Debug;
             });
-#else
+#endif
             options.AddOtlpExporter(o =>
             {
-                o.Endpoint = new Uri("http://otel-collector:4317");
+                o.Endpoint = new Uri(OTELCollectorURLPath());
             });
-#endif
             return options;
         }
     }
