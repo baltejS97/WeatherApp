@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace WeatherApp.Controllers
 {
@@ -18,8 +19,9 @@ namespace WeatherApp.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet]
+        [Route("GetWeatherForecast")]
+        public IEnumerable<WeatherForecast> GetWeatherForecast()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
@@ -28,6 +30,24 @@ namespace WeatherApp.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpGet]
+        [Route("GetOTELCollectorUrl")]
+        public Dictionary<string, string> GetOTELCollectorUrl()
+        {
+            var enviromentPath = Environment.GetEnvironmentVariable("OTEL_COLLECTOR_URL");
+            var url = "http://localhost:1234";
+            if (enviromentPath != null)
+            {
+                url = enviromentPath;
+            }
+
+            var dic = new Dictionary<string, string>();
+            dic.Add("name", "OTEL Collector URL");
+            dic.Add("url", url);
+
+            return dic;
         }
     }
 }
