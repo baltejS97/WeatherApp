@@ -13,7 +13,7 @@ COPY . .
 
 WORKDIR "/src/WeatherApp"
 
-ENV OTEL_COLLECTOR_URL=http://localhost:collector
+ENV OTEL_COLLECTOR_URL=http://localhost:1234
 
 RUN dotnet build "WeatherApp.csproj" -c Release -o /app/build
 
