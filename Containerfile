@@ -10,7 +10,11 @@ WORKDIR /src
 COPY ["WeatherApp/WeatherApp.csproj", "WeatherApp/"]
 RUN dotnet restore "WeatherApp/WeatherApp.csproj"
 COPY . .
+
 WORKDIR "/src/WeatherApp"
+
+ENV OTEL_COLLECTOR_URL=http://localhost:collector
+
 RUN dotnet build "WeatherApp.csproj" -c Release -o /app/build
 
 FROM build AS publish
