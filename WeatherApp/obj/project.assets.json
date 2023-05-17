@@ -1332,11 +1332,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bsingh\\Documents\\C# Playground\\WeatherApp\\WeatherApp\\WeatherApp.csproj",
+      "projectUniqueName": "D:\\WeatherApp\\WeatherApp\\WeatherApp.csproj",
       "projectName": "WeatherApp",
-      "projectPath": "C:\\Users\\bsingh\\Documents\\C# Playground\\WeatherApp\\WeatherApp\\WeatherApp.csproj",
+      "projectPath": "D:\\WeatherApp\\WeatherApp\\WeatherApp.csproj",
       "packagesPath": "C:\\Users\\bsingh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bsingh\\Documents\\C# Playground\\WeatherApp\\WeatherApp\\obj\\",
+      "outputPath": "D:\\WeatherApp\\WeatherApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
